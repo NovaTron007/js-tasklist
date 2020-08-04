@@ -19,6 +19,7 @@ function loadEventListeners() {
 function addTask(e) {
   if (taskInput.value === "") {
     alert("You must enter a task");
+    return;
   }
 
   // create a tasklist elements
