@@ -8,16 +8,17 @@ const filter = document.querySelector("#filter");
 // load event listeners
 loadEventListeners();
 
-// form event to trigger addTask
+// events
 function loadEventListeners() {
-  form.addEventListener("submit", addTask);
+  form.addEventListener("submit", addTask); // add task
+  taskList.addEventListener("click", removeTask); // remove task
+  clearBtn.addEventListener("click", clearTasks);
 }
 
 // addTask
 function addTask(e) {
   if (taskInput.value === "") {
     alert("You must enter a task");
-    return;
   }
 
   // create a tasklist elements
@@ -43,4 +44,23 @@ function addTask(e) {
   taskInput.value = "";
 
   e.preventDefault();
+}
+
+// remove task from ui
+function removeTask(e) {
+  if (e.target.parentElement.classList.contains("delete-item")) {
+    if (confirm("Are you sure?")) {
+      e.target.parentElement.parentElement.remove(); // remove element two up from icon
+      console.log(e.target);
+    }
+  }
+}
+
+// clear btn
+function clearTasks() {
+  // while loop faster: while there is an li in taskList div remove it
+  // taskList.innerHTML = "";
+  while (taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild);
+  }
 }
